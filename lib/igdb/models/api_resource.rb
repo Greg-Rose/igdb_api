@@ -19,7 +19,7 @@ class Igdb::ApiResource < OpenStruct
     params = Hash.new.tap do |hash|
       hash['search'] = opts[:query] if opts[:query]
       hash['filters'] = opts[:filters] if opts[:filters]
-      hash['fields'] = '*'
+      hash['fields'] = opts[:fields] || '*'
     end
     build_collection(Igdb::Requester.get("#{self.path}", params), self.representer)
   end
@@ -29,7 +29,7 @@ class Igdb::ApiResource < OpenStruct
       hash['offset'] = opts[:offset] || 0
       hash['limit'] = opts[:limit] || 50
       hash['order'] = opts[:order] if opts[:order]
-      hash['fields'] = '*'
+      hash['fields'] = opts[:fields] || '*'
     end
     build_collection(Igdb::Requester.get("#{self.path}", params), self.representer)
   end
