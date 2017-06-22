@@ -18,7 +18,7 @@ class Igdb::ApiResource < OpenStruct
   def self.search(opts={})
     params = Hash.new.tap do |hash|
       hash['search'] = opts[:query] if opts[:query]
-      hash['filters'] = opts[:filters] if opts[:filters]
+      hash['filter'] = opts[:filter] if opts[:filter]
       hash['fields'] = opts[:fields] || '*'
     end
     build_collection(Igdb::Requester.get("#{self.path}", params), self.representer)
